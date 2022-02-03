@@ -1,6 +1,6 @@
+.vscode
 /node_modules
 /views
-*.env
 package-lock.json
-.DS_Store
-.vscode
+.env
+
