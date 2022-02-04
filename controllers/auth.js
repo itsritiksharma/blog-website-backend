@@ -50,7 +50,7 @@ exports.postSignup = async (req, res, next) => {
 
       token = jwt.sign(
         { userId: savedUser._id, userEmail: savedUser.userEmail },
-        "secret_Key+very^sec$re&t",
+        process.env.TOKEN_SECRET,
         {
           expiresIn: "1h",
         }
@@ -88,7 +88,7 @@ exports.postSignup = async (req, res, next) => {
 
   //   token = jwt.sign(
   //     { userId: user._id, userEmail: user.userEmail },
-  //     "secret_Key+very^sec$re&t",
+  //     process.env.TOKEN_SECRET,
   //     {
   //       expiresIn: "1h",
   //     }
@@ -127,14 +127,14 @@ exports.postLogin = async (req, res, next) => {
       req.body.password,
       user.password
     );
-    if (!validPassword && errorsArray.length !== 0) {
+    if (!validPassword || errorsArray.length !== 0) {
       throw new Error("Email or password is not valid!");
     }
     let token;
 
     token = jwt.sign(
       { userId: user._id, userEmail: user.userEmail },
-      "sec@ret_Ke%y+very^sec$re&t",
+      process.env.TOKEN_SECRET,
       {
         expiresIn: "1h",
       }
@@ -144,7 +144,7 @@ exports.postLogin = async (req, res, next) => {
       userEmail: user.userEmail,
       token: token,
     });
-  } catch (err) {
+  } catch (err) { 
     let errorMessages = [];
     errorsArray.forEach((msg) => {
       errorMessages.push(msg);
@@ -166,7 +166,7 @@ exports.postLogin = async (req, res, next) => {
 
   //       token = jwt.sign(
   //         { userId: currentUser._id, userEmail: currentUser.userEmail },
-  //         "sec@ret_Ke%y+very^sec$re&t",
+  //         process.env.TOKEN_SECRET,
   //         {
   //           expiresIn: "1h",
   //         }
@@ -185,7 +185,6 @@ exports.postLogin = async (req, res, next) => {
 
 // LOG THE USER OUT AND REDIRECT
 exports.postLogout = (req, res, next) => {
-  console.log("logout");
   // delete req.session;
   // res.redirect("/");
   // req.session.destroy((err) => {

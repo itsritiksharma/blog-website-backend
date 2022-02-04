@@ -25,6 +25,11 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use((req,res,next) => {
+  console.log(req.url, req.method, req.ip);
+  next();
+})
+
 app.use("/auth", authRoutes);
 
 app.listen(process.env.PORT || 8080);
