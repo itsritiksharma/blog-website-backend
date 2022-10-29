@@ -20,7 +20,7 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+  res.setHeader("Access-Control-Allow-Origin", "https://blog-website-react-frontend.onrender.com/");
   res.setHeader("Access-Control-Allow-Method", "GET, POST, DELETE, PUT, PATCH");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
   // res.setHeader("Access-Control-Allow-Expose-Headers", "Set-Cookie");
