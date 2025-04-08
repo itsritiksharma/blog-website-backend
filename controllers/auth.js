@@ -7,6 +7,10 @@ const User = require("../models/user");
 
 const ObjectId = mongoose.ObjectId;
 
+exports.testing = async (req, res, next) => {
+	res.status(200).json({ message: "Good API." })
+}
+
 // CHECK IF THE USER ALREADY EXISTS, HASH THE PASSWORD, AND GENERATE THE TOKEN.
 exports.postSignup = async (req, res, next) => {
 	let errorsArray = [];
