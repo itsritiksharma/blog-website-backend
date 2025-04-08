@@ -12,7 +12,7 @@ module.exports = (req, res, next) => {
 
 		if (!token) {
 			res.status(401).json({
-				error: "Authentication failed, no token"
+				error: "Unauthorised access."
 			});
 			return;
 		}
@@ -20,7 +20,7 @@ module.exports = (req, res, next) => {
 		jwt.verify(token.split(" ")[1], process.env.TOKEN_SECRET, (err, decodedToken) => {
 			if (err) {
 				res.status(401).json({
-					message: "Authentication failed. Invalid token."
+					message: "Unauthorised access."
 				})
 				return;
 			}
