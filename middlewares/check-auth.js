@@ -11,16 +11,18 @@ module.exports = (req, res, next) => {
 		const token = req.headers.authorization; // Authorization: Bearer + token
 
 		if (!token) {
-			return res.status(401).json({
+			res.status(401).json({
 				error: "Authentication failed, no token"
 			});
+			return;
 		}
 
 		jwt.verify(token.split(" ")[1], process.env.TOKEN_SECRET, (err, decodedToken) => {
 			if (err) {
-				return res.status(401).json({
+				res.status(401).json({
 					message: "Authentication failed. Invalid token."
 				})
+				return;
 			}
 			req.userData = {
 				userId: decodedToken.userId,
